@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Publicacion</title>
+		<link rel="shortcut icon" href="/static/images/icono.jpg" /> 
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+	</head>
+	<body>
+		<div class="publicacion">
+			<h1>Crear Publicación</h1>
+			
+			<form action="{{ url_for('publicacion') }}" method="post" autocomplete="off">		
+                <label for="tipoPublicacion">
+					<i class="fas fa-id-card"></i>
+				</label>
+				<input type="text" name="tipoPublicacion" placeholder="tipoPublicacion" id="tipoPublicacion" required>
+                <label for="tipoMasota">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="tipoMasota" name="tipoMasota" placeholder="tipoMasota" id="tipoMasota" minlength="5" maxlength="10" required>
+				<label for="nombreMascota">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="nombreMascota" placeholder="nombreMascota" id="nombreMascota" required>
+				<label for="color">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="color" placeholder="color" id="color" required>
+				<label for="edad">
+					<i class="fas fa-map-marker-alt"></i>
+				</label>
+				<input type="text" name="edad" placeholder="edad" id="edad" required>
+                <label for="sexo">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="sexo" placeholder="sexo" id="sexo" required>
+                <label for="ubicacion">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="ubicacion" placeholder="ubicacion" id="ubicacion" required>
+                <label for="foto">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="image" name="foto" placeholder="foto" id="foto" required>
+                <label for="fecha">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="datetime" name="fecha" placeholder="fecha" id="fecha" required>
+                <label for="mensaje">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="mensaje" placeholder="mensaje" id="mensaje" required>
+				<div class="msg-error">{{ error }}</div>
+				<input type="submit" value="Crear">
+			</form>
+		</div>
+	</body>
+</html>
