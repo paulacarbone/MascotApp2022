@@ -19,7 +19,7 @@
                 <label for="tipoMascota">
 					<i class="fas fa-solid fa-paw"></i>
 				</label>
-				<input type="tipoMascota" name="tipoMascota" placeholder="tipoMascota" id="tipoMascota" minlength="5" maxlength="10" required>
+				<input type="tipoMascota" name="tipoMascota" placeholder="tipoMascota" id="tipoMascota" required>
 				<label for="nombreMascota">
 					<i class="fas fa-solid fa-paw"></i>
 				</label>
@@ -53,6 +53,7 @@
 				</label>
 				<input type="text" name="mensaje" placeholder="mensaje" id="mensaje" required>
 				<div class="msg-error">{{ error }}</div>
+				<div class="msg-success">{{ msg }}</div>
 				<input type="submit" value="Crear">
 			</form>
 		</div>

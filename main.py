@@ -102,7 +102,7 @@ def register():
 @app.route('/publicacion', methods=['GET', 'POST'])
 def publicacion():
     error = ''
-   
+    
     if request.method == 'POST':
         tipoPublicacion = request.form['tipoPublicacion']
         tipoMascota = request.form['tipoMascota']
@@ -120,8 +120,9 @@ def publicacion():
         cursor.execute('INSERT INTO publicacion VALUES (NULL, NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (tipoPublicacion, tipoMascota, nombreMascota, color, edad, sexo, ubicacion, foto, fecha, mensaje))
         mysql.connection.commit()
         msg = 'Publicación registrada correctamente!'
-        
+        return render_template('publicacion.html', msg = msg)
     return render_template('publicacion.html')
+    
    
 
 @app.route('/home')
