@@ -115,10 +115,12 @@ def publicacion():
         fecha = request.form['fecha']
         mensaje = request.form['mensaje']
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-                            
-        msg = 'Publicación registrada correctamente!'
-        cursor.execute('INSERT INTO publicacion VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (tipoPublicacion, tipoMascota, nombreMascota, color, edad, sexo, ubicacion, foto, fecha, mensaje))
+                                    
+        
+        cursor.execute('INSERT INTO publicacion VALUES (NULL, NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (tipoPublicacion, tipoMascota, nombreMascota, color, edad, sexo, ubicacion, foto, fecha, mensaje))
         mysql.connection.commit()
+        msg = 'Publicación registrada correctamente!'
+        
     return render_template('publicacion.html')
    
 
