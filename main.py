@@ -100,10 +100,10 @@ def register():
     return render_template('register.html', error = error)
 
 @app.route('/publicacion', methods=['GET', 'POST'])
-def publicacion():
-    error = ''
+def publicacion():    
     
     if request.method == 'POST':
+        global user 
         tipoPublicacion = request.form['tipoPublicacion']
         tipoMascota = request.form['tipoMascota']
         nombreMascota = request.form['nombreMascota']
@@ -114,10 +114,10 @@ def publicacion():
         foto = request.form['foto']
         fecha = request.form['fecha']
         mensaje = request.form['mensaje']
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-                                    
+        idUsuario = user['id']        
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)                                    
         
-        cursor.execute('INSERT INTO publicacion VALUES (NULL, NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (tipoPublicacion, tipoMascota, nombreMascota, color, edad, sexo, ubicacion, foto, fecha, mensaje))
+        cursor.execute('INSERT INTO publicacion VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (idUsuario,tipoPublicacion, tipoMascota, nombreMascota, color, edad, sexo, ubicacion, foto, fecha, mensaje))
         mysql.connection.commit()
         msg = 'Publicación registrada correctamente!'
         return render_template('publicacion.html', msg = msg)
