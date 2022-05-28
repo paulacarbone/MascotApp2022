@@ -1,6 +1,9 @@
+import datetime
+from colorama import Cursor
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
+
 
 app = Flask(__name__)
 app.secret_key = 'your secret key'
@@ -20,7 +23,12 @@ def refreshList() :
     cursor.execute('SELECT * FROM accounts WHERE id = %s', (user['id'],))
     user = cursor.fetchone()
 
-
+# este metodo lo hice de prueba para traer de la bbdd todos los nombres pero a futuro traer las localidades.
+# def nombres() :
+#     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor) 
+#     cursor.execute('SELECT nombre FROM accounts')
+#     user = cursor.fetchall()
+#     print(user)    
 
 @app.route('/', methods = ['GET', 'POST'])
 def login():
@@ -121,7 +129,9 @@ def publicacion():
         mysql.connection.commit()
         msg = 'Publicación registrada correctamente!'
         return render_template('publicacion.html', msg = msg)
-    return render_template('publicacion.html')
+    # nombres()    
+    fecha = datetime.datetime.now()
+    return render_template('publicacion.html', fecha = fecha)
     
    
 

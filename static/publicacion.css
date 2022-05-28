@@ -4,6 +4,10 @@
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+   
+}
+select{
+    width: 79%;
 }
 
 body {

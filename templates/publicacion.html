@@ -14,16 +14,22 @@
 			<form action="{{ url_for('publicacion') }}" method="post" autocomplete="off">		
                 <label for="tipoPublicacion">
 					<i class="fas fa-id-card"></i>
-				</label>
-				<input type="text" name="tipoPublicacion" placeholder="tipoPublicacion" id="tipoPublicacion" required>
-                <label for="tipoMascota">
+				</label>				
+				<select name="tipoPublicacion" id="tipoPublicacion" required>					
+					<option value=""disabled selected>Tipo publicación</option>			  
+					<option value="perdida">Perdida</option>			  
+					<option value="encontrada">Encontrada</option>			  
+				  </select>                
+				<label for="tipoMascota">					
 					<i class="fas fa-solid fa-paw"></i>
 				</label>
 				<input type="tipoMascota" name="tipoMascota" placeholder="tipoMascota" id="tipoMascota" required>
+				
 				<label for="nombreMascota">
 					<i class="fas fa-solid fa-paw"></i>
 				</label>
 				<input type="text" name="nombreMascota" placeholder="nombreMascota" id="nombreMascota" required>
+				
 				<label for="color">
 					<i class="fas fa-regular fa-brush"></i>
 				</label>
@@ -35,7 +41,11 @@
                 <label for="sexo">
 					<i class="fas fa-regular fa-venus-mars"></i>
 				</label>
-				<input type="text" name="sexo" placeholder="sexo" id="sexo" required>
+				<select name="sexo">					
+					<option value=""disabled selected>Sexo</option>			  
+					<option value="macho">Macho</option>			  
+					<option value="hembra">Hembra</option>			  
+				  </select>
                 <label for="ubicacion">
 					<i class="fas fa-regular fa-location-arrow"></i>
 				</label>
@@ -47,7 +57,8 @@
                 <label for="fecha">
 					<i class="fas fa-regular fa-calendar"></i>
 				</label>
-				<input type="text" name="fecha" placeholder="fecha" id="fecha" required>
+				<input name="fecha" type="date" value={{fecha}} />
+
                 <label for="mensaje">
 					<i class="fas fa-regular fa-comment"></i>
 				</label>
