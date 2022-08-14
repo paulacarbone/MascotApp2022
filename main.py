@@ -23,12 +23,7 @@ def refreshList() :
     cursor.execute('SELECT * FROM accounts WHERE id = %s', (user['id'],))
     user = cursor.fetchone()
 
-# este metodo lo hice de prueba para traer de la bbdd todos los nombres pero a futuro traer las localidades.
-# def nombres() :
-#     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor) 
-#     cursor.execute('SELECT nombre FROM accounts')
-#     user = cursor.fetchall()
-#     print(user)    
+
 
 @app.route('/', methods = ['GET', 'POST'])
 def login():
@@ -107,10 +102,12 @@ def register():
             return render_template('index.html', msg = msg)
     return render_template('register.html', error = error)
 
+
 @app.route('/publicacion', methods=['GET', 'POST'])
 def publicacion():    
     
     if request.method == 'POST':
+
         global user 
         tipoPublicacion = request.form['tipoPublicacion']
         tipoMascota = request.form['tipoMascota']
@@ -119,17 +116,19 @@ def publicacion():
         edad = request.form['edad']
         sexo = request.form['sexo']
         ubicacion = request.form['ubicacion']
+        calle = request.form['calle']
         foto = request.form['foto']
         fecha = request.form['fecha']
         mensaje = request.form['mensaje']
-        idUsuario = user['id']        
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)                                    
+        idUsuario = user['id']             
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)      
+                     
         
-        cursor.execute('INSERT INTO publicacion VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (idUsuario,tipoPublicacion, tipoMascota, nombreMascota, color, edad, sexo, ubicacion, foto, fecha, mensaje))
+        cursor.execute('INSERT INTO publicacion VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (idUsuario,tipoPublicacion, tipoMascota, nombreMascota, color, edad, sexo, ubicacion,calle, foto, fecha, mensaje))
         mysql.connection.commit()
         msg = 'Publicación registrada correctamente!'
         return render_template('publicacion.html', msg = msg)
-    # nombres()    
+        
     fecha = datetime.datetime.now()
     return render_template('publicacion.html', fecha = fecha)
     
@@ -144,7 +143,7 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run(port=3306, debug=True)
+    app.run(port=3307, debug=True)
 
 
     
