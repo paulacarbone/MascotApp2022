@@ -117,7 +117,7 @@ def publicacion():
         sexo = request.form['sexo']
         ubicacion = request.form['ubicacion']
         calle = request.form['calle']
-        foto = request.form['foto']
+        foto = request.files['foto'].read()
         fecha = request.form['fecha']
         mensaje = request.form['mensaje']
         idUsuario = user['id']             
