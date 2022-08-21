@@ -1,6 +1,7 @@
 import datetime
+from io import BytesIO
 from colorama import Cursor
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, send_file
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 
@@ -132,6 +133,21 @@ def publicacion():
     fecha = datetime.datetime.now()
     return render_template('publicacion.html', fecha = fecha)
     
+@app.route('/publicacion/<int:idPublicacion>/foto', methods=['GET'])
+def publicacion_foto(idPublicacion):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT foto FROM publicacion where idPublicacion = %s', (idPublicacion,))
+    publicacion = cursor.fetchone()
+    
+    return send_file(BytesIO(publicacion['foto']), mimetype='image/jpeg')
+
+@app.route('/publicaciones', methods=['GET'])
+def publicaciones():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM publicacion')
+    publicaciones = cursor.fetchall()
+
+    return render_template('publicaciones.html', publicaciones = publicaciones)
    
 
 @app.route('/home')

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Publicacion</title>
+    <link rel="shortcut icon" href="/static/images/icono.jpg" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='publicaciones.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+    />
+  </head>
+  <body>
+<h1>Publicaciones</h1>
+<table>
+    <th>nombre mascota</th>
+    <th>foto</th>
+    {% for publicacion in publicaciones %}
+        <tr>
+            <td>{{ publicacion.nombreMascota }}</td>
+            <td><img onerror="this.style.display='none'" class="foto" src="{{url_for('publicacion_foto', idPublicacion=publicacion.idPublicacion)}}" /></td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+
