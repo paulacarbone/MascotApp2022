@@ -14,14 +14,36 @@
     />
   </head>
   <body>
+    <nav class="navtop">
+			
+			<div>
+				<h1>MASCOTAPP</h1>
+                <a href="{{ url_for('edit') }}"><i class="fas fa-user-edit"></i>Editar</a>
+				<a href="{{ url_for('publicacion') }}"><i class="fas fa-regular fa-upload"></i>Publicar</a>
+				<a href="{{ url_for('publicaciones') }}"><i class="fas fa-regular fa-list"></i>Publicaciones</a>			
+				<a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Cerrar Sesion</a>
+			</div>
+		</nav>
 <h1>Publicaciones</h1>
 <table>
-    <th>nombre mascota</th>
-    <th>foto</th>
+    <th>Nombre de la mascota</th>
+    <th>Foto</th>
+    <th>Sexo</th>
+    <th>Edad</th>
+    <th>Ubicacion</th>
+    <th>Calles</th>
+    <th>Fecha</th>
+    <th>Mensaje</th>
     {% for publicacion in publicaciones %}
         <tr>
             <td>{{ publicacion.nombreMascota }}</td>
             <td><img onerror="this.style.display='none'" class="foto" src="{{url_for('publicacion_foto', idPublicacion=publicacion.idPublicacion)}}" /></td>
+            <td>{{ publicacion.sexo}}</td>
+            <td>{{ publicacion.edad}}</td>
+            <td>{{ publicacion.ubicacion}}</td>
+            <td>{{ publicacion.calles}}</td>
+            <td>{{ publicacion.fecha}}</td>
+            <td>{{ publicacion.mensaje}}</td>
         </tr>
     {% endfor %}
 </table>
