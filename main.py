@@ -11,16 +11,16 @@ app.secret_key = 'your secret key'
 
  
 #setup bbdd local
-#app.config['MYSQL_HOST'] = 'localhost'
-#app.config['MYSQL_USER'] = 'root'
-#app.config['MYSQL_PASSWORD'] = ''
-#app.config['MYSQL_DB'] = 'pythonlogin'
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'pythonlogin'
 
 #setup bbdd pythonanywhere
-app.config['MYSQL_HOST'] = 'leonorperez.mysql.pythonanywhere-services.com'
-app.config['MYSQL_USER'] = 'leonorperez'
-app.config['MYSQL_PASSWORD'] = 'lascano4044'
-app.config['MYSQL_DB'] = 'leonorperez$pythonlogin'
+#app.config['MYSQL_HOST'] = 'leonorperez.mysql.pythonanywhere-services.com'
+#app.config['MYSQL_USER'] = 'leonorperez'
+#app.config['MYSQL_PASSWORD'] = 'lascano4044'
+#app.config['MYSQL_DB'] = 'leonorperez$pythonlogin'
 
 user = {}
 mysql = MySQL(app)
@@ -30,7 +30,6 @@ def refreshList() :
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('SELECT * FROM accounts WHERE id = %s', (user['id'],))
     user = cursor.fetchone()
-
 
 
 @app.route('/', methods = ['GET', 'POST'])
@@ -112,11 +111,13 @@ def register():
 
 
 @app.route('/publicacion', methods=['GET', 'POST'])
-def publicacion():    
+def publicacion():   
+    global user
+    if len(user) == 0:
+        return redirect(url_for('login')) 
     
-    if request.method == 'POST':
-
-        global user 
+    elif request.method == 'POST':
+       
         tipoPublicacion = request.form['tipoPublicacion']
         tipoMascota = request.form['tipoMascota']
         nombreMascota = request.form['nombreMascota']
@@ -135,7 +136,9 @@ def publicacion():
         cursor.execute('INSERT INTO publicacion VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (idUsuario,tipoPublicacion, tipoMascota, nombreMascota, color, edad, sexo, ubicacion,calle, foto, fecha, mensaje))
         mysql.connection.commit()
         msg = 'Publicación registrada correctamente!'
-        return render_template('publicacion.html', msg = msg)
+        refreshList()        
+        render_template('publicacion.html', msg = msg)
+        return redirect(url_for('home'))
         
     fecha = datetime.datetime.now()
     return render_template('publicacion.html', fecha = fecha)
