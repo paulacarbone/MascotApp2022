@@ -3,7 +3,7 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<p>¡Bienvenido, {{ nombre }} {{apellido}}!</p>
+<p>¡Bienvenido, {{ nombre.capitalize() }} {{apellido.capitalize()}}!</p>
 <img src="../static/images/pagina en construccion.jpg" alt="espacio en construccion" width="850px" title="Espacio en construccion"/>
 
 {% endblock %}
