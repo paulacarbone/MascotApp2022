@@ -1,7 +1,8 @@
 import datetime
 from io import BytesIO
+from re import S
 from colorama import Cursor
-from flask import Flask, render_template, request, redirect, url_for, session, send_file
+from flask import Flask, render_template, request, redirect, url_for, session, send_file, flash
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 
@@ -166,6 +167,14 @@ def home():
     if 'loggedin' in session:
         return render_template('home.html', nombre = user['nombre'], apellido = user['apellido'])
     return redirect(url_for('login'))  
+
+@app.route('/delete/<string:idPublicacion>')
+def delete_publicacion(idPublicacion):
+    cursor = mysql.connection.cursor()
+    cursor.execute('DELETE FROM publicacion WHERE idPublicacion = %s', (idPublicacion,))
+    mysql.connection.commit()
+    return redirect(url_for('publicaciones'))
+    
 
 
 if __name__ == "__main__":

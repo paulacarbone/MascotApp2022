@@ -35,8 +35,12 @@
     <th>Calles</th>
     <th>Fecha</th>
     <th>Mensaje</th>
+    
+    <tbody>
+      
     {% for publicacion in publicaciones %}
         <tr>
+            
             <td>{{ publicacion.nombreMascota }}</td>
             <td><img onerror="this.style.display='none'" class="foto" src="{{url_for('publicacion_foto', idPublicacion=publicacion.idPublicacion)}}" /></td>
             <td>{{ publicacion.sexo}}</td>
@@ -45,7 +49,12 @@
             <td>{{ publicacion.calles}}</td>
             <td>{{ publicacion.fecha}}</td>
             <td>{{ publicacion.mensaje}}</td>
+            <td id="options">
+                <a href="/delete/{{publicacion.idPublicacion}}" class="btn btn-secondary btn-delete">Delete</a>
+          </td>
+
         </tr>
+</tbody>
     {% endfor %}
 </table>
 </body>
