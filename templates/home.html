@@ -4,6 +4,56 @@
 
 {% block content %}
 <p>¡Bienvenido, {{ nombre.capitalize() }} {{apellido.capitalize()}}!</p>
-<img src="../static/images/pagina en construccion.jpg" alt="espacio en construccion" width="850px" title="Espacio en construccion"/>
-
+<!-- <img src="../static/images/pagina en construccion.jpg" alt="espacio en construccion" width="850px" title="Espacio en construccion"/> -->
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5" aria-label="Slide 6"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="6" aria-label="Slide 7"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="7" aria-label="Slide 8"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="8" aria-label="Slide 9"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="../static/images/campañas/Adopcion..PNG" class="d-block w-90 h-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="../static/images/campañas/CampañaAdopcion.jpg" class="d-block w-50 h-50" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="../static/images/campañas/campVacuna.png" class="d-block w-90 h-70" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="../static/images/campañas/calendarioPerro.jpg" class="d-block w-40 h-40" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="../static/images/campañas/calendario-vacunas-gatos.jpg" class="d-block w-50 h-50" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="../static/images/campañas/gatoVacuna.jpg" class="d-block w-50 h-50" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="../static/images/campañas/vacunaPerri.jpg" class="d-block w-50 h-50" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="../static/images/campañas/vacuGato.jpg" class="d-block w-50 h-50" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="../static/images/fondo2.jpg" class="d-block w-50 h-50" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  
 {% endblock %}
