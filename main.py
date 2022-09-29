@@ -1,7 +1,7 @@
 import datetime
 from io import BytesIO
 from re import S
-from colorama import Cursor
+#from colorama import Cursor
 from flask import Flask, render_template, request, redirect, url_for, session, send_file, flash
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
@@ -12,16 +12,16 @@ app.secret_key = 'your secret key'
 
  
 #setup bbdd local
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'pythonlogin'
+#app.config['MYSQL_HOST'] = 'localhost'
+#app.config['MYSQL_USER'] = 'root'
+#app.config['MYSQL_PASSWORD'] = ''
+#app.config['MYSQL_DB'] = 'pythonlogin'
 
 #setup bbdd pythonanywhere
-#app.config['MYSQL_HOST'] = 'leonorperez.mysql.pythonanywhere-services.com'
-#app.config['MYSQL_USER'] = 'leonorperez'
-#app.config['MYSQL_PASSWORD'] = 'lascano4044'
-#app.config['MYSQL_DB'] = 'leonorperez$pythonlogin'
+app.config['MYSQL_HOST'] = 'leonorperez.mysql.pythonanywhere-services.com'
+app.config['MYSQL_USER'] = 'leonorperez'
+app.config['MYSQL_PASSWORD'] = 'lascano4044'
+app.config['MYSQL_DB'] = 'leonorperez$pythonlogin'
 
 user = {}
 mysql = MySQL(app)
@@ -177,8 +177,8 @@ def delete_publicacion(idPublicacion):
     
 
 
-if __name__ == "__main__":
-    app.run(port=3306, debug=True)
+#if __name__ == "__main__":
+#    app.run(port=3307, debug=True)
 
 
     
