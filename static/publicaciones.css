@@ -93,3 +93,10 @@ th{
 .navtop div a:hover {
     color: #eaebed;
 }
+#filtrar{
+    color: #ffffff;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    
+}
