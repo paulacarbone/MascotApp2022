@@ -36,6 +36,7 @@
    <label for="encontradas">Encontradas</label><br>
    <input type="radio" id="todas" name="tipoPub" value="todas">
    <label for="todas">Todas</label>
+   
 </form>
 </div>
 
@@ -64,12 +65,24 @@
             <td>{{ publicacion.mensaje}}</td>
             <td id="options">
                 <a href="/delete/{{publicacion.idPublicacion}}" id="btn-delete"class="btn btn-secondary btn-delete">Delete</a>
-          </td>
-         
-         
+                {% with messagges = get_flashed_messages() %}
+                {% if messagges %} 
+                {% for message in messagges %}       
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+               <strong>{{ message }}</strong> 
+            </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+              </td>
+              
+              
         </tr>
+      
+       
 </tbody>
     {% endfor %}
-</table>
+   
+  </table>
 </body>
 

@@ -100,3 +100,9 @@ th{
     justify-content: center;
     
 }
+div.content p {
+    text-align: center;
+    font-size: xx-large;
+    color: ghostwhite;
+    font-weight: 600;
+}

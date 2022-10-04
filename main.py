@@ -12,16 +12,10 @@ app.secret_key = 'your secret key'
 
  
 #setup bbdd local
-#app.config['MYSQL_HOST'] = 'localhost'
-#app.config['MYSQL_USER'] = 'root'
-#app.config['MYSQL_PASSWORD'] = ''
-#app.config['MYSQL_DB'] = 'pythonlogin'
-
-#setup bbdd pythonanywhere
-app.config['MYSQL_HOST'] = 'leonorperez.mysql.pythonanywhere-services.com'
-app.config['MYSQL_USER'] = 'leonorperez'
-app.config['MYSQL_PASSWORD'] = 'lascano4044'
-app.config['MYSQL_DB'] = 'leonorperez$pythonlogin'
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'pythonlogin'
 
 user = {}
 mysql = MySQL(app)
@@ -170,19 +164,19 @@ def home():
 
 @app.route('/delete/<string:idPublicacion>')
 def delete_publicacion(idPublicacion):
-    msg = ''
+    
     cursor = mysql.connection.cursor()
     if cursor.execute('DELETE FROM publicacion WHERE idPublicacion = %s and idUsuario = %s', (idPublicacion,user['id'],)):
         mysql.connection.commit()
     else:
-       msg = 'No puedes borrar esta publicacion!' 
-    render_template('publicaciones.html', msg= msg)
+       flash('No puedes borrar esta publicación')
+       render_template('publicaciones.html')
     return redirect(url_for('publicaciones'))
     
 
 
-#if __name__ == "__main__":
-#    app.run(port=3307, debug=True)
+if __name__ == "__main__":
+    app.run(port=3306, debug=True)
 
 
     
