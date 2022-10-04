@@ -170,9 +170,13 @@ def home():
 
 @app.route('/delete/<string:idPublicacion>')
 def delete_publicacion(idPublicacion):
+    msg = ''
     cursor = mysql.connection.cursor()
-    cursor.execute('DELETE FROM publicacion WHERE idPublicacion = %s', (idPublicacion,))
-    mysql.connection.commit()
+    if cursor.execute('DELETE FROM publicacion WHERE idPublicacion = %s and idUsuario = %s', (idPublicacion,user['id'],)):
+        mysql.connection.commit()
+    else:
+       msg = 'No puedes borrar esta publicacion!' 
+    render_template('publicaciones.html', msg= msg)
     return redirect(url_for('publicaciones'))
     
 

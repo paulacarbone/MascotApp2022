@@ -24,10 +24,11 @@
 				<a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Cerrar Sesion</a>
 			</div>
 		</nav>
-
+    
 <h1>Publicaciones</h1>
+<div style = "background-color: blue; color:#ffffff" class="msg-error">{{ msg }}</div> 
 <div class="container">
-  <p style="color: #ffffff; text-align:center">Filtrar</p>
+   <p style="color: #ffffff; text-align:center">Filtrar</p>
 <form id="filtrar"action="">
    <input type="radio" id="perdidas" name="tipoPub" value="perdidas">
    <label for="perdidas">Perdidas</label><br>
@@ -53,7 +54,6 @@
       
     {% for publicacion in publicaciones %}
         <tr>
-            
             <td>{{ publicacion.nombreMascota }}</td>
             <td><img onerror="this.style.display='none'" class="foto" src="{{url_for('publicacion_foto', idPublicacion=publicacion.idPublicacion)}}" /></td>
             <td>{{ publicacion.sexo}}</td>
@@ -63,9 +63,10 @@
             <td>{{ publicacion.fecha}}</td>
             <td>{{ publicacion.mensaje}}</td>
             <td id="options">
-                <a href="/delete/{{publicacion.idPublicacion}}" class="btn btn-secondary btn-delete">Delete</a>
+                <a href="/delete/{{publicacion.idPublicacion}}" id="btn-delete"class="btn btn-secondary btn-delete">Delete</a>
           </td>
-
+         
+         
         </tr>
 </tbody>
     {% endfor %}
