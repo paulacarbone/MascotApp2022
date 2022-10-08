@@ -1,11 +1,9 @@
 import datetime
 from io import BytesIO
 from re import S
-#from colorama import Cursor
 from flask import Flask, render_template, request, redirect, url_for, session, send_file, flash
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
-
 
 app = Flask(__name__)
 app.secret_key = 'your secret key'
@@ -162,21 +160,29 @@ def home():
         return render_template('home.html', nombre = user['nombre'], apellido = user['apellido'])
     return redirect(url_for('login'))  
 
-@app.route('/delete/<string:idPublicacion>')
+@app.route('/delete/<int:idPublicacion>')
 def delete_publicacion(idPublicacion):
     
     cursor = mysql.connection.cursor()
-    if cursor.execute('DELETE FROM publicacion WHERE idPublicacion = %s and idUsuario = %s', (idPublicacion,user['id'],)):
-        mysql.connection.commit()
+    resp = cursor.execute('DELETE FROM publicacion WHERE idPublicacion = %s and idUsuario = %s', (idPublicacion,user['id'],))
+    mysql.connection.commit()
+    if resp:
+        flash('publicación eliminada correctamente')
+
     else:
        flash('No puedes borrar esta publicación')
-       render_template('publicaciones.html')
+
     return redirect(url_for('publicaciones'))
     
 
 
+
+
+
+
+
 if __name__ == "__main__":
-    app.run(port=3306, debug=True)
+    app.run(port=3307, debug=True)
 
 
     

@@ -4,85 +4,93 @@
     <meta charset="utf-8" />
     <title>Publicacion</title>
     <link rel="shortcut icon" href="/static/images/icono.jpg" />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='publicaciones.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
-    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='publicaciones.css') }}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"/>
+    <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.min.css" />
   </head>
   <body>
     <nav class="navtop">
-			
-			<div>
-				<h1><a href="{{ url_for('home') }}" id="alhome">MASCOTAPP</a></h1>
-                <a href="{{ url_for('edit') }}"><i class="fas fa-user-edit"></i>Editar</a>
-				<a href="{{ url_for('publicacion') }}"><i class="fas fa-regular fa-upload"></i>Publicar</a>
-				<a href="{{ url_for('publicaciones') }}"><i class="fas fa-regular fa-list"></i>Publicaciones</a>			
-				<a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Cerrar Sesion</a>
-			</div>
-		</nav>
-    
-<h1>Publicaciones</h1>
-<div style = "background-color: blue; color:#ffffff" class="msg-error">{{ msg }}</div> 
-<div class="container">
-   <p style="color: #ffffff; text-align:center">Filtrar</p>
-<form id="filtrar"action="">
-   <input type="radio" id="perdidas" name="tipoPub" value="perdidas">
-   <label for="perdidas">Perdidas</label><br>
-   <input type="radio" id="encontradas" name="tipoPub" value="encontradas">
-   <label for="encontradas">Encontradas</label><br>
-   <input type="radio" id="todas" name="tipoPub" value="todas">
-   <label for="todas">Todas</label>
-   
-</form>
-</div>
+      <div>
+        <h1><a href="{{ url_for('home') }}" id="alhome">MASCOTAPP</a></h1>
+        <a href="{{ url_for('edit') }}"
+          ><i class="fas fa-user-edit"></i>Editar</a
+        >
+        <a href="{{ url_for('publicacion') }}"
+          ><i class="fas fa-regular fa-upload"></i>Publicar</a
+        >
+        <a href="{{ url_for('publicaciones') }}"
+          ><i class="fas fa-regular fa-list"></i>Publicaciones</a
+        >
+        <a href="{{ url_for('logout') }}"
+          ><i class="fas fa-sign-out-alt"></i>Cerrar Sesion</a
+        >
+      </div>
+    </nav>
 
+    <h1>Publicaciones</h1>
+     <div class="container">
+      <p style="color: #ffffff; text-align: center">Filtrar</p>
+      <form id="filtrar" action="">
+        <input type="radio" id="perdidas" name="tipoPub" value="perdidas" />
+        <label for="perdidas">Perdidas</label><br />
+        <input
+          type="radio"
+          id="encontradas"
+          name="tipoPub"
+          value="encontradas"
+        />
+        <label for="encontradas">Encontradas</label><br />
+        <input type="radio" id="todas" name="tipoPub" value="todas" />
+        <label for="todas">Todas</label>
+      </form>
+    </div>
 
-<table>
-    <th>Nombre de la mascota</th>
-    <th>Foto</th>
-    <th>Sexo</th>
-    <th>Edad</th>
-    <th>Ubicacion</th>
-    <th>Calles</th>
-    <th>Fecha</th>
-    <th>Mensaje</th>
-    
-    <tbody>
-      
-    {% for publicacion in publicaciones %}
+    <table>
+      <th>Nombre de la mascota</th>
+      <th>Foto</th>
+      <th>Sexo</th>
+      <th>Edad</th>
+      <th>Ubicacion</th>
+      <th>Calles</th>
+      <th>Fecha</th>
+      <th>Mensaje</th>
+
+      <tbody>
+        {% for publicacion in publicaciones %}
         <tr>
-            <td>{{ publicacion.nombreMascota }}</td>
-            <td><img onerror="this.style.display='none'" class="foto" src="{{url_for('publicacion_foto', idPublicacion=publicacion.idPublicacion)}}" /></td>
-            <td>{{ publicacion.sexo}}</td>
-            <td>{{ publicacion.edad}}</td>
-            <td>{{ publicacion.ubicacion}}</td>
-            <td>{{ publicacion.calles}}</td>
-            <td>{{ publicacion.fecha}}</td>
-            <td>{{ publicacion.mensaje}}</td>
-            <td id="options">
-                <a href="/delete/{{publicacion.idPublicacion}}" id="btn-delete"class="btn btn-secondary btn-delete">Delete</a>
-                {% with messagges = get_flashed_messages() %}
-                {% if messagges %} 
-                {% for message in messagges %}       
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-               <strong>{{ message }}</strong> 
-            </div>
-                {% endfor %}
-                {% endif %}
-                {% endwith %}
-              </td>
-              
-              
+          <td>{{ publicacion.nombreMascota }}</td>
+          <td>
+            <img onerror="this.style.display='none'" class="foto" src="{{url_for('publicacion_foto', idPublicacion=publicacion.idPublicacion)}}"/>
+          </td>
+          <td>{{ publicacion.sexo}}</td>
+          <td>{{ publicacion.edad}}</td>
+          <td>{{ publicacion.ubicacion}}</td>
+          <td>{{ publicacion.calles}}</td>
+          <td>{{ publicacion.fecha}}</td>
+          <td>{{ publicacion.mensaje}}</td>
+          <td id="options">
+            <a
+              href="/delete/{{publicacion.idPublicacion}}"
+              id="btn-delete"
+              class="btn btn-secondary btn-delete"
+              >Delete</a
+            >
+          </td>
         </tr>
-      
-       
-</tbody>
-    {% endfor %}
-   
-  </table>
-</body>
+      </tbody>
+      {% endfor %}
 
+       {% with messagges = get_flashed_messages() %} 
+       {% if messagges %} 
+       {% for message in messagges %}
+      <div id="mjeBorrado" class="alert alert-warning alert-dismissible fade show text-center my-3" role="alert">
+        <strong>{{ message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %} {% endif %}
+       {% endwith %}
+    </table>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+     <script src="../static/js/main.js"></script>
+  </body>
+</html>

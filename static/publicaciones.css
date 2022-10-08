@@ -106,3 +106,7 @@ div.content p {
     color: ghostwhite;
     font-weight: 600;
 }
+#mjeBorrado, #btn-delete{
+    background-color: rgb(233, 86, 33);
+    text-align: center;
+}

@@ -4,21 +4,15 @@
     <meta charset="utf-8" />
     <title>Publicacion</title>
     <link rel="shortcut icon" href="/static/images/icono.jpg" />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='publicacion.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
-    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='publicacion.css') }}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"/>
   </head>
+
   <body>
-    <nav class="navtop">
-			
+    <nav class="navtop">			
 			<div>
 				<h1><a href="{{ url_for('home') }}">MASCOTAPP</a></h1>
-                <a href="{{ url_for('edit') }}"><i class="fas fa-user-edit"></i>Editar</a>
+        <a href="{{ url_for('edit') }}"><i class="fas fa-user-edit"></i>Editar</a>
 				<a href="{{ url_for('publicacion') }}"><i class="fas fa-regular fa-upload"></i>Publicar</a>
 				<a href="{{ url_for('publicaciones') }}"><i class="fas fa-regular fa-list"></i>Publicaciones</a>			
 				<a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Cerrar Sesion</a>
