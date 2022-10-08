@@ -29,76 +29,79 @@
 
     <h1>Publicaciones</h1>
     <div class="container text-center">
-        <p style="color: #ffffff;">Filtrar</p>
-        <form id="filtrar" action="{{ url_for('publicaciones') }}" class="row g-3">
-          <div class="col-auto d-flex align-items-center">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="tipoPublicacion" id="tipo-todas" value="todas"  {{ 'checked' if request.args['tipoPublicacion'] in ('todas', null) }}>
-              <label class="form-check-label" for="tipo-todas">Todas</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="tipoPublicacion" id="tipo-perdidas" value="perdida" {{ 'checked' if request.args['tipoPublicacion'] == 'perdida' }}>
-              <label class="form-check-label" for="tipo-perdidas">Perdidas</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="tipoPublicacion" id="tipo-encontradas" value="encontrada" {{ 'checked' if request.args['tipoPublicacion'] == 'encontrada' }}>
-              <label class="form-check-label" for="tipo-encontradas">Encontradas</label>
-            </div>
+      <p style="color: #ffffff;">Filtrar</p>
+      <form id="filtrar" action="{{ url_for('publicaciones') }}" class="row g-3">
+        <div class="col-auto d-flex align-items-center">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="tipoPublicacion" id="tipo-todas" value="todas"  {{ 'checked' if request.args['tipoPublicacion'] in ('todas', null) }}>
+            <label class="form-check-label" for="tipo-todas">Todas</label>
           </div>
-          <div class="col-auto">
-            <input class="form-control" name="ubicacion" id="ubicacion" value="{{ request.args['ubicacion'] }}" placeholder="Ubicación">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="tipoPublicacion" id="tipo-perdidas" value="perdida" {{ 'checked' if request.args['tipoPublicacion'] == 'perdida' }}>
+            <label class="form-check-label" for="tipo-perdidas">Perdidas</label>
           </div>
-          <div class="col-auto">
-            <button type="submit" class="btn btn-primary btn-small">Buscar</button>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="tipoPublicacion" id="tipo-encontradas" value="encontrada" {{ 'checked' if request.args['tipoPublicacion'] == 'encontrada' }}>
+            <label class="form-check-label" for="tipo-encontradas">Encontradas</label>
           </div>
-        </form>
-    </div>
+        </div>
+        <div class="col-auto">
+          <input class="form-control" name="ubicacion" id="ubicacion" value="{{ request.args['ubicacion'] }}" placeholder="Ubicación">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary btn-small">Buscar</button>
+        </div>
+      </form>
       
-    <table>
-      <th>Nombre de la mascota</th>
-      <th>Foto</th>
-      <th>Sexo</th>
-      <th>Edad</th>
-      <th>Ubicacion</th>
-      <th>Calles</th>
-      <th>Fecha</th>
-      <th>Mensaje</th>
+      <table class="table">
+        <thead class="align-middle">
+          <th>Tipo de publicación</th>
+          <th>Nombre de la mascota</th>
+          <th>Foto</th>
+          <th>Sexo</th>
+          <th>Edad</th>
+          <th>Ubicación</th>
+          <th>Calles</th>
+          <th>Fecha</th>
+          <th>Mensaje</th>
+        </thead>
+        <tbody class="align-middle">
+          {% for publicacion in publicaciones %}
+          <tr>
+            <td>{{ publicacion.tipoPublicacion }}</td>
+            <td>{{ publicacion.nombreMascota }}</td>
+            <td>
+              <img onerror="this.style.display='none'" class="foto" src="{{url_for('publicacion_foto', idPublicacion=publicacion.idPublicacion)}}"/>
+            </td>
+            <td>{{ publicacion.sexo}}</td>
+            <td>{{ publicacion.edad}}</td>
+            <td>{{ publicacion.ubicacion}}</td>
+            <td>{{ publicacion.calles}}</td>
+            <td>{{ publicacion.fecha}}</td>
+            <td>{{ publicacion.mensaje}}</td>
+            <td id="options">
+              <a
+                href="/delete/{{publicacion.idPublicacion}}"
+                id="btn-delete"
+                class="btn btn-secondary btn-delete"
+                >Delete</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        {% with messagges = get_flashed_messages() %} 
+        {% if messagges %} 
+        {% for message in messagges %}
+        <div id="mjeBorrado" class="alert alert-warning alert-dismissible fade show text-center my-3" role="alert">
+          <strong>{{ message }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %} {% endif %}
+        {% endwith %}
+      </table>
+    </div>
 
-      <tbody>
-        {% for publicacion in publicaciones %}
-        <tr>
-          <td>{{ publicacion.nombreMascota }}</td>
-          <td>
-            <img onerror="this.style.display='none'" class="foto" src="{{url_for('publicacion_foto', idPublicacion=publicacion.idPublicacion)}}"/>
-          </td>
-          <td>{{ publicacion.sexo}}</td>
-          <td>{{ publicacion.edad}}</td>
-          <td>{{ publicacion.ubicacion}}</td>
-          <td>{{ publicacion.calles}}</td>
-          <td>{{ publicacion.fecha}}</td>
-          <td>{{ publicacion.mensaje}}</td>
-          <td id="options">
-            <a
-              href="/delete/{{publicacion.idPublicacion}}"
-              id="btn-delete"
-              class="btn btn-secondary btn-delete"
-              >Delete</a
-            >
-          </td>
-        </tr>
-      </tbody>
-      {% endfor %}
-
-       {% with messagges = get_flashed_messages() %} 
-       {% if messagges %} 
-       {% for message in messagges %}
-      <div id="mjeBorrado" class="alert alert-warning alert-dismissible fade show text-center my-3" role="alert">
-        <strong>{{ message }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-      {% endfor %} {% endif %}
-       {% endwith %}
-    </table>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
      <script src="../static/js/main.js"></script>
   </body>
