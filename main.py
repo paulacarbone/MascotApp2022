@@ -153,7 +153,25 @@ def publicacion_foto(idPublicacion):
 @app.route('/publicaciones', methods=['GET'])
 def publicaciones():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute('SELECT * FROM publicacion')
+
+    query = "SELECT * FROM publicacion"
+    queryFilters = []
+
+    tipoPublicacion = request.args.get('tipoPublicacion')
+    ubicacion = request.args.get('ubicacion')
+
+    if tipoPublicacion != None and tipoPublicacion != 'todas':
+        queryFilters.append(f"tipoPublicacion = '{tipoPublicacion}'")
+
+    if ubicacion != None and ubicacion != "":
+        queryFilters.append(f"lower(ubicacion) = '{ubicacion.lower()}'")
+
+    if queryFilters:
+        query += ' WHERE '
+        query += ' AND '.join(queryFilters)
+
+    app.logger.debug(query)
+    cursor.execute(query)
     publicaciones = cursor.fetchall()
 
     return render_template('publicaciones.html', publicaciones = publicaciones)
@@ -181,8 +199,8 @@ def delete_publicacion(idPublicacion):
     return redirect(url_for('publicaciones'))
     
 
-#if __name__ == "__main__":
-#    app.run(port=3307, debug=True)
+if __name__ == "__main__":
+   app.run(port=3307, debug=True)
 
 
     

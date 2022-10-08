@@ -28,23 +28,32 @@
     </nav>
 
     <h1>Publicaciones</h1>
-     <div class="container">
-      <p style="color: #ffffff; text-align: center">Filtrar</p>
-      <form id="filtrar" action="">
-        <input type="radio" id="perdidas" name="tipoPub" value="perdidas" />
-        <label for="perdidas">Perdidas</label><br />
-        <input
-          type="radio"
-          id="encontradas"
-          name="tipoPub"
-          value="encontradas"
-        />
-        <label for="encontradas">Encontradas</label><br />
-        <input type="radio" id="todas" name="tipoPub" value="todas" />
-        <label for="todas">Todas</label>
-      </form>
+    <div class="container text-center">
+        <p style="color: #ffffff;">Filtrar</p>
+        <form id="filtrar" action="{{ url_for('publicaciones') }}" class="row g-3">
+          <div class="col-auto d-flex align-items-center">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="tipoPublicacion" id="tipo-todas" value="todas"  {{ 'checked' if request.args['tipoPublicacion'] in ('todas', null) }}>
+              <label class="form-check-label" for="tipo-todas">Todas</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="tipoPublicacion" id="tipo-perdidas" value="perdida" {{ 'checked' if request.args['tipoPublicacion'] == 'perdida' }}>
+              <label class="form-check-label" for="tipo-perdidas">Perdidas</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="tipoPublicacion" id="tipo-encontradas" value="encontrada" {{ 'checked' if request.args['tipoPublicacion'] == 'encontrada' }}>
+              <label class="form-check-label" for="tipo-encontradas">Encontradas</label>
+            </div>
+          </div>
+          <div class="col-auto">
+            <input class="form-control" name="ubicacion" id="ubicacion" value="{{ request.args['ubicacion'] }}" placeholder="Ubicación">
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary btn-small">Buscar</button>
+          </div>
+        </form>
     </div>
-
+      
     <table>
       <th>Nombre de la mascota</th>
       <th>Foto</th>
