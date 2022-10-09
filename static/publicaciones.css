@@ -29,11 +29,12 @@ table {
     margin: 10px auto;
 }
 
-h1{
+#titpubli{
     text-align:center;
     color: #ffffff;
     font-size: 40px;
     padding: 0px 0 20px 0;
+    margin-top: 2%;
 }
 
 th{

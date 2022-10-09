@@ -199,8 +199,8 @@ def delete_publicacion(idPublicacion):
     return redirect(url_for('publicaciones'))
     
 
-if __name__ == "__main__":
-   app.run(port=3307, debug=True)
+#if __name__ == "__main__":
+#   app.run(port=3307, debug=True)
 
 
     
