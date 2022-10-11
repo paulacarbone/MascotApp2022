@@ -132,12 +132,19 @@ def publicacion():
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)      
                      
         
-        cursor.execute('INSERT INTO publicacion VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (idUsuario,tipoPublicacion, tipoMascota, nombreMascota, color, edad, sexo, ubicacion,calle, foto, fecha, mensaje))
+        resp =cursor.execute('INSERT INTO publicacion VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (idUsuario,tipoPublicacion, tipoMascota, nombreMascota, color, edad, sexo, ubicacion,calle, foto, fecha, mensaje))
         mysql.connection.commit()
         msg = 'Publicación registrada correctamente!'
         refreshList()        
         render_template('publicacion.html', msg = msg)
-        return redirect(url_for('home'))
+        if resp:
+             flash('PUBLICACION CREADA CORRECTAMENTE')
+             return redirect(url_for('publicaciones'))
+        else:
+             flash('HUBO UN ERROR AL PUBLICAR')
+     
+
+        return redirect(url_for('publicacion'))
         
     fecha = datetime.datetime.now()
     return render_template('publicacion.html', fecha = fecha)
@@ -191,10 +198,10 @@ def delete_publicacion(idPublicacion):
     resp = cursor.execute('DELETE FROM publicacion WHERE idPublicacion = %s and idUsuario = %s', (idPublicacion,user['id'],))
     mysql.connection.commit()
     if resp:
-        flash('publicación eliminada correctamente')
+        flash('PUBLICACION ELIMINADA CORRECTAMENTE')
 
     else:
-       flash('No puedes borrar esta publicación')
+       flash('NO PUEDES BORRAR ESTA PUBLICACION')
 
     return redirect(url_for('publicaciones'))
     

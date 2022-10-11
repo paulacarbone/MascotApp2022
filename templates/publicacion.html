@@ -133,6 +133,15 @@
         <div class="msg-success">{{ msg }}</div>
         <input type="submit" value="Crear" />
       </form>
+      {% with messagges = get_flashed_messages() %} 
+        {% if messagges %} 
+        {% for message in messagges %}
+        <div id="mjePub" class="alert alert-warning alert-dismissible fade show text-center my-3" role="alert">
+          <strong>{{ message }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %} {% endif %}
+        {% endwith %}
     </div>
   </body>
 </html>
