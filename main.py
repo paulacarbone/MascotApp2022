@@ -70,16 +70,18 @@ def edit():
         password = request.form['password']
         nombre = request.form['nombre']
         apellido = request.form['apellido']
+        celular = request.form['celular']
         localidad = request.form['localidad']
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute("""
             UPDATE accounts
             SET nombre = %s,
                 apellido = %s,
+                celular = %s,
                 localidad = %s,
                 password = %s
             WHERE id = %s
-        """, (nombre, apellido, localidad, password, user['id'],))
+        """, (nombre, apellido, celular, localidad, password, user['id'],))
         mysql.connection.commit()
         refreshList()
         return redirect(url_for('home'))
@@ -92,6 +94,7 @@ def register():
     if request.method == 'POST':
         nombre = request.form['nombre']
         apellido = request.form['apellido']
+        celular = request.form['celular']
         localidad = request.form['localidad']
         usuario = request.form['usuario']
         password = request.form['password']
@@ -102,7 +105,7 @@ def register():
         if account:
             error = '¡El usuario ya existe!'
         else:                     
-            cursor.execute('INSERT INTO accounts VALUES (NULL, %s, %s, %s, %s, %s)', (nombre, apellido, localidad, usuario, password,))
+            cursor.execute('INSERT INTO accounts VALUES (NULL, %s, %s, %s, %s, %s, %s)', (nombre, apellido, celular, localidad, usuario, password,))
             mysql.connection.commit()
             msg = '¡Usuario registrado correctamente!'
             return render_template('index.html', msg = msg)
