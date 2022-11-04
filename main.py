@@ -70,18 +70,16 @@ def edit():
         password = request.form['password']
         nombre = request.form['nombre']
         apellido = request.form['apellido']
-        celular = request.form['celular']
         localidad = request.form['localidad']
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute("""
             UPDATE accounts
             SET nombre = %s,
                 apellido = %s,
-                celular = %s,
                 localidad = %s,
                 password = %s
             WHERE id = %s
-        """, (nombre, apellido, celular, localidad, password, user['id'],))
+        """, (nombre, apellido, localidad, password, user['id'],))
         mysql.connection.commit()
         refreshList()
         return redirect(url_for('home'))
@@ -131,11 +129,11 @@ def publicacion():
         foto = request.files['foto'].read()
         fecha = request.form['fecha']
         mensaje = request.form['mensaje']
-        idUsuario = user['id']             
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)      
-                     
+        idUsuario = user['id']   
+        contacto = user['celular']          
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)               
         
-        resp =cursor.execute('INSERT INTO publicacion VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (idUsuario,tipoPublicacion, tipoMascota, nombreMascota, color, edad, sexo, ubicacion,calle, foto, fecha, mensaje))
+        resp =cursor.execute('INSERT INTO publicacion VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (idUsuario,tipoPublicacion, tipoMascota, nombreMascota, color, edad, sexo, ubicacion,calle, foto, fecha, mensaje, contacto))
         mysql.connection.commit()
         msg = 'Publicación registrada correctamente!'
         refreshList()        

@@ -27,19 +27,19 @@
             <label for="nombre">
                 <i class="fas fa-user"></i>
             </label>
-            <input type="text" name="nombre" placeholder="Nombre" id="nombre" required value="{{user['nombre']}}">
+            <input type="text" name="nombre" placeholder="Nombre" id="nombre" required value="{{user['nombre']}}">           
             <label for="apellido">
                 <i class="fas fa-user"></i>
             </label>
             <input type="text" name="apellido" placeholder="Apellido" id="apellido" required value="{{user['apellido']}}">
-            <label for="localidad">
+            <!-- <label for="celular">
                 <i class="fas fa-phone"></i>
             </label>
-            <input type="text" name="celular" placeholder="Celular" id="celular" required value="{{user['celular']}}">
-            <label for="celular">
+            <input type="text" name="celular" placeholder="Celular" id="celular" required value="{{user['celular']}}"> -->
+            <label for="localidad">
                 <i class="fas fa-map-marker-alt"></i>
             </label>
-            <input type="text" name="localidad" placeholder="Localidad" id="localidad" required value="{{user['localidad']}}">
+            <input type="text" name="localidad" placeholder="Localidad" id="localidad" required value="{{user['localidad']}}">          
             <div class="msg">{{ msg }}</div>
             <input type="submit" value="Modificar">
         </form>

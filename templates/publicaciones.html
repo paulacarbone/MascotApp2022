@@ -68,21 +68,21 @@
         <tbody class="align-middle">
           {% for publicacion in publicaciones %}
           <tr>
-            <td>{{ publicacion.tipoPublicacion }}</td>
-            <td>{{ publicacion.nombreMascota }}</td>
+            <td>{{ publicacion.tipoPublicacion.capitalize()}}</td>
+            <td>{{ publicacion.nombreMascota.capitalize() }}</td>
             <td>
               <img onerror="this.style.display='none'" class="foto" src="{{url_for('publicacion_foto', idPublicacion=publicacion.idPublicacion)}}"/>
             </td>
-            <td>{{ publicacion.sexo}}</td>
-            <td>{{ publicacion.edad}}</td>
-            <td>{{ publicacion.ubicacion}}</td>
-            <td>{{ publicacion.calles}}</td>
+            <td>{{ publicacion.sexo.capitalize()}}</td>
+            <td>{{ publicacion.edad.capitalize()}}</td>
+            <td>{{ publicacion.ubicacion.capitalize()}}</td>
+            <td>{{ publicacion.calle.capitalize()}}</td>
             <td>{{ publicacion.fecha}}</td>
-            <td>{{ publicacion.mensaje}}</td>
+            <td>{{ publicacion.mensaje.capitalize()}}</td>
 
             <!-- aca va icono wpp -->
             <td>
-              <a href="" id="contacto" class="fab fa-whatsapp fa-2x"></a>
+              <a href="https://api.whatsapp.com/send?phone={{publicacion.celularContacto}}&text=Hola!%20Escribo%20por%20la%20mascota%20publicada!" target="_blank" id="contacto" class="fab fa-whatsapp fa-2x"></a>
             </td>
 
             <td id="options">
