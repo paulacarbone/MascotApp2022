@@ -10,16 +10,16 @@ app.secret_key = 'your secret key'
 
  
 #setup bbdd local
-#app.config['MYSQL_HOST'] = 'localhost'
-#app.config['MYSQL_USER'] = 'root'
-#app.config['MYSQL_PASSWORD'] = ''
-#app.config['MYSQL_DB'] = 'pythonlogin'
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'pythonlogin'
 
 #setup bbdd pythonanywhere
-app.config['MYSQL_HOST'] = 'leonorperez.mysql.pythonanywhere-services.com'
-app.config['MYSQL_USER'] = 'leonorperez'
-app.config['MYSQL_PASSWORD'] = 'lascano4044'
-app.config['MYSQL_DB'] = 'leonorperez$pythonlogin'
+#app.config['MYSQL_HOST'] = 'leonorperez.mysql.pythonanywhere-services.com'
+#app.config['MYSQL_USER'] = 'leonorperez'
+#app.config['MYSQL_PASSWORD'] = 'lascano4044'
+#app.config['MYSQL_DB'] = 'leonorperez$pythonlogin'
 
 user = {}
 mysql = MySQL(app)
@@ -209,12 +209,32 @@ def delete_publicacion(idPublicacion):
 
 @app.route('/usuario', methods=['GET'])
 def usuario():
+    global user
+    if len(user) == 0:
+        return redirect(url_for('login'))
+    elif request.method == 'POST':
+        password = request.form['password']
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        localidad = request.form['localidad']
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute("""
+            SELECT accounts
+            SET nombre = %s,
+                apellido = %s,
+                localidad = %s,
+                password = %s
+            WHERE id = %s
+        """, (nombre, apellido, localidad, password, user['id'],))
+        mysql.connection.commit()
+        refreshList()
+        return redirect(url_for('home'))
+    return render_template('usuario.html', user = user)
 
-    return render_template('usuario.html', usuario = usuario)
    
 
-#if __name__ == "__main__":
-#   app.run(port=3306, debug=True)
+if __name__ == "__main__":
+   app.run(port=3306, debug=True)
 
 
     
