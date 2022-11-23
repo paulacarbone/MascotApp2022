@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Editar Usuario</title>
     <link rel="shortcut icon" href="/static/images/icono.jpg" />     
-    <link rel="stylesheet" href="{{ url_for('static', filename='edit.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='usuario.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 </head>
 <body>
@@ -12,6 +12,7 @@
 			
         <div>
             <h1>MASCOTAPP</h1>
+            <H2>MI PERFIL</H2>
             <a href="{{ url_for('home') }}"><i class="fas fa-sign-out-alt"></i>Volver</a>
             <a href="{{ url_for('publicacion') }}"><i class="fas fa-regular fa-upload"></i>Publicar</a>
             <a href="{{ url_for('publicaciones') }}"><i class="fas fa-regular fa-list"></i>Publicaciones</a>			
@@ -20,21 +21,24 @@
     </nav>
    
     <div class="edit">
+        <img class="avatar avatar-128 bg-light rounded-circle text-white p-2"
+     src="../static/images/hombre-mujer.jpg" width="50%" height="50%" border-radius="70%">
+
       <h1>Mis Datos Personales</h1>
     
         <form action="{{ url_for('edit') }}" method="post" autocomplete="off">
          
          
-            <p><i class="fas fa-user"></i> Nombre <input type="text" name="nombre" placeholder="Nombre" id="nombre" required value="{{user['nombre']}}"></p>           
+            <p><i class="fas fa-user"></i> Nombre <input type="text" readonly name="nombre" placeholder="Nombre" id="nombre" required value="{{user['nombre']}}"></p>           
            
-            <p><i class="fas fa-user"></i> Apellido <input type="text" name="apellido" placeholder="Apellido" id="apellido" required value="{{user['apellido']}}"></p>
+            <p><i class="fas fa-user"></i> Apellido <input type="text" readonly name="apellido" placeholder="Apellido" id="apellido" required value="{{user['apellido']}}"></p>
             <!-- <label for="celular">
                 <i class="fas fa-phone"></i>
             </label>
             <input type="text" name="celular" placeholder="Celular" id="celular" required value="{{user['celular']}}"> -->
-            <p><i class="fas fa-phone"></i> Celular <input type="text" name="localidad" placeholder="Localidad" id="localidad" required value="{{user['celular']}}"></p>       
+            <p><i class="fas fa-phone"></i> Celular <input type="text" readonly name="localidad" placeholder="Localidad" id="localidad" required value="{{user['celular']}}"></p>       
           
-            <p><i class="fas fa-map-marker-alt"></i> Localidad <input type="text" name="localidad" placeholder="Localidad" id="localidad" required value="{{user['localidad']}}"></p>       
+            <p><i class="fas fa-map-marker-alt"></i> Localidad <input type="text" readonly name="localidad" placeholder="Localidad" id="localidad" required value="{{user['localidad']}}"></p>       
           
           
         </form>
