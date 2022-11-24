@@ -167,6 +167,7 @@ def publicaciones():
 
     tipoPublicacion = request.args.get('tipoPublicacion')
     ubicacion = request.args.get('ubicacion')
+    soloMisPublicaciones = request.args.get('soloMisPublicaciones')
 
     if tipoPublicacion != None and tipoPublicacion != 'todas':
         queryFilters.append(f"tipoPublicacion = '{tipoPublicacion}'")
@@ -174,11 +175,15 @@ def publicaciones():
     if ubicacion != None and ubicacion != "":
         queryFilters.append(f"lower(ubicacion) = '{ubicacion.lower()}'")
 
+    if soloMisPublicaciones == 'on':
+        refreshList()
+        queryFilters.append(f"idUsuario = '{user['id']}'")
+
     if queryFilters:
         query += ' WHERE '
         query += ' AND '.join(queryFilters)
 
-    app.logger.debug(query)
+
     cursor.execute(query)
     publicaciones = cursor.fetchall()
 
